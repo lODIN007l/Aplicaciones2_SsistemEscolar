@@ -3,7 +3,7 @@ package com.sistemaEscuela.aplicaciones2.modelo;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Periodo")
+@Table(name="Periodos")
 public class Periodo {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
