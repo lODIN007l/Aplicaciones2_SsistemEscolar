@@ -1,5 +1,6 @@
 package com.sistemaEscuela.aplicaciones2.controlador;
 
+import com.sistemaEscuela.aplicaciones2.Security.Validations;
 import com.sistemaEscuela.aplicaciones2.modelo.Admin;
 import com.sistemaEscuela.aplicaciones2.servicios.AdminService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
+    Validations validator;
 
     @Autowired
     AdminService adminService;
@@ -22,12 +24,10 @@ public class AdminController {
     }
 
     @PostMapping("/register")
-    public Admin registrarAdmin(@ModelAttribute Admin admin, Model model){
-        if(adminService.existeAdmin(admin.getCedula())){
-            model.addAttribute("error","Este Administrador ya existe");
+    public Admin registrarAdmin(@RequestBody Admin admin){
+        if(adminService.existeAdmin(admin.getCedula()) || validator.validarCedula(admin.getCedula())){
             return null;
         }
-
         return this.adminService.guardarAdmin(admin);
     }
 
@@ -49,4 +49,6 @@ public class AdminController {
             return "No se ha encontrado al Administrador";
         }
     }
+
+
 }

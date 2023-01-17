@@ -20,11 +20,11 @@ public class DocenteController {
     }
 
     @PostMapping()
-    public Docente guardarEstudiante(@RequestBody Docente docen){
+    public Docente guardarDocente(@RequestBody Docente docen){
         return this.docenServi.guardarDocente(docen);
     }
     @GetMapping(path = "/{id}" )
-    public Optional<Docente> obtenerEstudianteID (@PathVariable("id") Long id){
+    public Optional<Docente> obtenerDocenteID (@PathVariable("id") Long id){
         return this.docenServi.obtenerporID(id);
     }
     @DeleteMapping(path = "/{id}")
