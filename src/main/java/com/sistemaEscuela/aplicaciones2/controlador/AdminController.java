@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.Optional;
 
@@ -50,6 +51,11 @@ public class AdminController {
         }else{
             return "No se ha encontrado al Administrador";
         }
+    }
+
+    @PutMapping(path = "editarAdmin/{cedula}")
+    public String editarAdmin (@PathVariable("cedula") String cedula, @RequestBody Admin admin){
+        return this.adminService.actualizarAdmin(cedula,admin);
     }
 
 

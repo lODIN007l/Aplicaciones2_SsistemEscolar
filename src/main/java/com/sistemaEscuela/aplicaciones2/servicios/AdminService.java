@@ -44,4 +44,21 @@ public class AdminService {
     public boolean existeAdmin(String cedula) {
         return obtenerAdminCedula(cedula).isPresent();
     }
+
+    public String actualizarAdmin(String cedula, Admin adminT){
+        Admin admin;
+        Optional<Admin> adminOptional = adminRepository.findByCedula(cedula);
+        if(adminOptional.isPresent()){
+            admin = adminOptional.get();
+            admin.setNombres(adminT.getNombres());
+            admin.setApellidos(adminT.getApellidos());
+            admin.setCedula(adminT.getCedula());
+            admin.setCargo(adminT.getCargo());
+            admin.setRol(adminT.getRol());
+            admin.setPassword(adminT.getPassword());
+            adminRepository.save(admin);
+            return "Modificado exitosamente";
+        }
+        return "No se encontro el usuario especificado";
+    }
 }
