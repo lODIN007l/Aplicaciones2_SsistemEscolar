@@ -42,6 +42,6 @@ public class AdminService {
     }
 
     public boolean existeAdmin(String cedula) {
-        return (obtenerAdminCedula(cedula)) != null;
+        return obtenerAdminCedula(cedula).isPresent();
     }
 }

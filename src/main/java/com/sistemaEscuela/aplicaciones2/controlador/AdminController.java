@@ -13,7 +13,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    Validations validator;
+    Validations validator = new Validations();
 
     @Autowired
     AdminService adminService;
@@ -24,11 +24,13 @@ public class AdminController {
     }
 
     @PostMapping("/register")
-    public Admin registrarAdmin(@RequestBody Admin admin){
-        if(adminService.existeAdmin(admin.getCedula()) || validator.validarCedula(admin.getCedula())){
-            return null;
-        }
-        return this.adminService.guardarAdmin(admin);
+    public String registrarAdmin(@RequestBody Admin admin){
+        if(adminService.existeAdmin(admin.getCedula()))
+            return "Este administrador ya existe";
+        if(!validator.validarCedula(admin.getCedula()))
+            return "La cedula no es valida";
+        adminService.guardarAdmin(admin);
+        return "Usted se registro exitosamente";
     }
 
     @GetMapping(path = "/{id}")
