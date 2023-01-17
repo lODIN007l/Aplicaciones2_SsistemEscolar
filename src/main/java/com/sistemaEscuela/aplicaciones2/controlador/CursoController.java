@@ -30,11 +30,6 @@ public class CursoController {
     @DeleteMapping(path = "/{id}")
     public String eliminarporID (@PathVariable("id") Long id){
         boolean ok = this.cursoServi.EliminarCurso(id);
-        if(ok){
-            return "Estudiante Eliminado Correctamente";
-
-        }else{
-            return "No se ha encontrado al estudiante";
-        }
+        return ok?  "Estudiante Eliminado Correctamente" :  "No se ha encontrado al estudiante";
     }
 }

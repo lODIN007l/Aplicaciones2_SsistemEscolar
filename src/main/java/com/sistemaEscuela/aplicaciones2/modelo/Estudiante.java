@@ -5,7 +5,7 @@ import javax.persistence.*;
 
 
 @Entity
-@Table(name="Estudiante")
+@Table(name="Estudiantes")
 public class Estudiante {
 
 
